@@ -1,0 +1,102 @@
+{
+  "_description": "Configuration for cyclic peptide structure prediction with non-canonical amino acids",
+  "_source": "Extracted from examples/use_case_4_noncanonical_amino_acids.py",
+
+  "model": {
+    "name": "boltz2",
+    "_comment": "boltz2 recommended for handling modifications"
+  },
+
+  "processing": {
+    "accelerator": "cpu",
+    "_accelerator_comment": "cpu or gpu. GPU may be beneficial for complex modifications",
+    "diffusion_samples": 2,
+    "_diffusion_comment": "Multiple samples for modified peptides to capture structural diversity",
+    "recycling_steps": 5,
+    "_recycling_comment": "More recycling steps for complex modifications",
+    "use_msa_server": true
+  },
+
+  "modifications": {
+    "chain_id": "A",
+    "supported_types": {
+      "phosphorylation": ["phosphoserine", "phosphothreonine", "phosphotyrosine"],
+      "hydroxylation": ["hydroxyproline"],
+      "special_amino_acids": ["pyroglutamate", "citrulline", "ornithine", "norleucine"],
+      "selenium": ["selenocysteine", "selenomethionine"],
+      "d_amino_acids": ["d_alanine", "d_valine", "d_leucine", "d_phenylalanine"],
+      "methylation": ["methylated_lysine"],
+      "acetylation": ["acetylated_lysine"],
+      "nitration": ["nitrotyrosine"]
+    },
+    "ccd_mapping": {
+      "phosphoserine": "SEP",
+      "phosphothreonine": "TPO",
+      "phosphotyrosine": "PTR",
+      "hydroxyproline": "HYP",
+      "pyroglutamate": "PCA",
+      "citrulline": "CIR",
+      "ornithine": "ORN",
+      "norleucine": "NLE",
+      "aminobutyric": "ABA",
+      "selenocysteine": "SEC",
+      "selenomethionine": "MSE",
+      "d_alanine": "DAL",
+      "d_valine": "DVA",
+      "d_leucine": "DLE",
+      "d_phenylalanine": "DPN",
+      "methylated_lysine": "MLY",
+      "acetylated_lysine": "ALY",
+      "nitrotyrosine": "NIY"
+    }
+  },
+
+  "validation": {
+    "validate_sequence": true,
+    "validate_positions": true,
+    "_position_comment": "Check that modification positions are within sequence range"
+  },
+
+  "output": {
+    "auto_output_dir": true,
+    "_auto_comment": "Include modification count in output directory name",
+    "include_modification_summary": true
+  },
+
+  "examples": {
+    "phosphorylated": {
+      "sequence": "QLEDSEVEAVAKG",
+      "modifications": "3:phosphoserine",
+      "description": "Single phosphoserine modification at position 3"
+    },
+    "multiple_mods": {
+      "sequence": "QLEDSEVEAVAKG",
+      "modifications": "3:phosphoserine,7:hydroxyproline",
+      "description": "Multiple modifications: phosphoserine and hydroxyproline"
+    },
+    "d_amino_acid": {
+      "sequence": "QLEDSEVEAVAKG",
+      "modifications": "1:d_alanine,13:d_alanine",
+      "description": "D-amino acids at terminal positions for increased stability"
+    },
+    "ccd_codes": {
+      "sequence": "QLEDSEVEAVAKG",
+      "modifications": "3:SEP,7:HYP",
+      "description": "Using CCD codes directly instead of modification names"
+    }
+  },
+
+  "modification_guide": {
+    "_comment": "Guidelines for using modifications effectively",
+    "recommendations": [
+      "Use boltz2 for better handling of non-canonical residues",
+      "D-amino acids at terminal positions can increase cyclic peptide stability",
+      "Phosphorylation can affect binding and stability",
+      "Hydroxyproline can stabilize turns in cyclic structures",
+      "Multiple modifications may affect confidence scores"
+    ],
+    "format": "position:modification_name or position:CCD_code",
+    "multiple_format": "3:phosphoserine,7:hydroxyproline",
+    "position_note": "Positions are 1-indexed (first amino acid is position 1)"
+  }
+}

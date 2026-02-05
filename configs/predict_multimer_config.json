@@ -1,0 +1,58 @@
+{
+  "_description": "Configuration for cyclic peptide multimer prediction",
+  "_source": "Extracted from examples/use_case_2_cyclic_peptide_multimer.py",
+
+  "model": {
+    "name": "boltz1",
+    "_comment": "boltz1 or boltz2. Multimers may benefit from boltz2's enhanced interface prediction"
+  },
+
+  "processing": {
+    "accelerator": "cpu",
+    "_accelerator_comment": "cpu or gpu. GPU recommended for large multimers",
+    "diffusion_samples": 3,
+    "_diffusion_comment": "More samples for multimers to capture diverse binding modes",
+    "recycling_steps": 5,
+    "_recycling_comment": "More recycling steps for complex interactions",
+    "use_msa_server": true,
+    "_msa_comment": "Use ColabFold MSA server for sequence alignment"
+  },
+
+  "multimer": {
+    "auto_chain_ids": true,
+    "_auto_chain_comment": "Generate chain IDs automatically (A, B, C, etc.)",
+    "min_chains": 2,
+    "_min_comment": "Minimum number of chains required for multimer prediction",
+    "max_chains": 10,
+    "_max_comment": "Recommended maximum chains for reasonable processing time"
+  },
+
+  "validation": {
+    "validate_sequences": true,
+    "unique_chain_ids": true,
+    "_unique_comment": "Ensure chain IDs are unique across the multimer"
+  },
+
+  "output": {
+    "auto_output_dir": true,
+    "_auto_comment": "Generate output directory name based on chain count and total length"
+  },
+
+  "examples": {
+    "homodimer": {
+      "sequences": ["QLEDSEVEAVAKG", "QLEDSEVEAVAKG"],
+      "chain_ids": ["A", "B"],
+      "description": "Two identical cyclic peptides forming a dimer"
+    },
+    "heterodimer": {
+      "sequences": ["QLEDSEVEAVAKG", "MKLFWDESG"],
+      "chain_ids": ["A", "B"],
+      "description": "Two different cyclic peptides"
+    },
+    "heterotrimer": {
+      "sequences": ["QLEDSEVEAVAKG", "MKLFWDESG", "AVSTELIG"],
+      "chain_ids": ["A", "B", "C"],
+      "description": "Three different cyclic peptides forming a complex"
+    }
+  }
+}

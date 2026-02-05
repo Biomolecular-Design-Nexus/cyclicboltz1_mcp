@@ -1,0 +1,43 @@
+{
+  "_description": "Configuration for cyclic peptide structure prediction",
+  "_source": "Extracted from examples/use_case_1_cyclic_peptide_structure.py",
+
+  "model": {
+    "name": "boltz1",
+    "_comment": "boltz1 or boltz2. boltz2 has more features but may require more resources"
+  },
+
+  "processing": {
+    "accelerator": "cpu",
+    "_accelerator_comment": "cpu or gpu. Use gpu if CUDA is available for faster processing",
+    "diffusion_samples": 1,
+    "_diffusion_comment": "Number of structure samples. More samples = better diversity but slower",
+    "recycling_steps": 3,
+    "_recycling_comment": "Iterative refinement steps. More steps = better quality but slower",
+    "use_msa_server": true,
+    "_msa_comment": "Use ColabFold MSA server for sequence alignment. Set false for offline mode"
+  },
+
+  "validation": {
+    "validate_sequence": true,
+    "_validation_comment": "Check for valid amino acid characters before processing"
+  },
+
+  "output": {
+    "chain_id": "A",
+    "_chain_comment": "Chain identifier in output structure",
+    "auto_output_dir": true,
+    "_auto_comment": "Generate output directory name automatically if not specified"
+  },
+
+  "examples": {
+    "short_peptide": {
+      "sequence": "QLEDSEVEAVAKG",
+      "description": "13-residue cyclic peptide from original examples"
+    },
+    "medium_peptide": {
+      "sequence": "QLEDSEVEKVAGKQLEDSEVEAVAKG",
+      "description": "26-residue larger cyclic peptide"
+    }
+  }
+}

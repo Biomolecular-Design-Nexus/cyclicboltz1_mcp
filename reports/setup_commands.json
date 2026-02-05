@@ -1,0 +1,8 @@
+{
+  "setup_commands": [
+    "(command -v mamba >/dev/null 2>&1 && mamba create -p ./env python=3.10 -y) || (command -v conda >/dev/null 2>&1 && conda create -p ./env python=3.10 -y) || (echo \"Warning: Neither mamba nor conda found, creating venv instead\" && python3 -m venv ./env)",
+    "cd repo/boltz && ./env/bin/pip install -e . && cd ../..",
+    "./env/bin/pip install fastmcp loguru --ignore-installed",
+    "(command -v mamba >/dev/null 2>&1 && mamba install -p ./env -c conda-forge rdkit -y) || (command -v conda >/dev/null 2>&1 && conda install -p ./env -c conda-forge rdkit -y) || (echo \"Warning: Neither mamba nor conda found, using pip for rdkit\" && ./env/bin/pip install rdkit)"
+  ]
+}

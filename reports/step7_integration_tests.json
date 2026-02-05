@@ -1,0 +1,96 @@
+{
+  "test_date": "2025-12-31T01:14:20.279408",
+  "server_path": "src/server.py",
+  "project_root": ".",
+  "tests": {
+    "dependency_fastmcp": {
+      "status": "passed",
+      "output": "FastMCP OK\n",
+      "error": "",
+      "test_type": "dependency"
+    },
+    "dependency_loguru": {
+      "status": "passed",
+      "output": "Loguru OK\n",
+      "error": "",
+      "test_type": "dependency"
+    },
+    "dependency_pathlib": {
+      "status": "passed",
+      "output": "Pathlib OK\n",
+      "error": "",
+      "test_type": "dependency"
+    },
+    "script_predict_structure.py": {
+      "status": "passed",
+      "path": "scripts/predict_structure.py",
+      "exists": true,
+      "test_type": "file_existence"
+    },
+    "script_predict_multimer.py": {
+      "status": "passed",
+      "path": "scripts/predict_multimer.py",
+      "exists": true,
+      "test_type": "file_existence"
+    },
+    "script_predict_affinity.py": {
+      "status": "passed",
+      "path": "scripts/predict_affinity.py",
+      "exists": true,
+      "test_type": "file_existence"
+    },
+    "script_predict_modified.py": {
+      "status": "passed",
+      "path": "scripts/predict_modified.py",
+      "exists": true,
+      "test_type": "file_existence"
+    },
+    "server_import": {
+      "status": "passed",
+      "output": "Server imports OK\n",
+      "error": "",
+      "test_type": "import"
+    },
+    "job_manager_import": {
+      "status": "passed",
+      "output": "Job manager OK\n",
+      "error": "",
+      "test_type": "import"
+    },
+    "job_directory": {
+      "status": "passed",
+      "output": "Jobs dir: True\n",
+      "error": "",
+      "path": "jobs",
+      "test_type": "directory"
+    },
+    "mcp_registration": {
+      "status": "passed",
+      "output": "Checking MCP server health...\n\ncycpep-tools: /home/xux/miniforge3/envs/cycpepmcp/bin/python /home/xux/Desktop/CycPepMCP/CycPepMCP/tool-mcps/cyclicboltz1_mcp/src/server.py - \u2713 Connected\n",
+      "error": "",
+      "test_type": "mcp_registration"
+    },
+    "mcp_connection": {
+      "status": "passed",
+      "output": "Server shows as connected",
+      "test_type": "mcp_connection"
+    },
+    "server_dev_mode": {
+      "status": "passed",
+      "output": "Starting MCP inspector...\n\u2699\ufe0f Proxy server listening on localhost:6277\n\ud83d\udd11 Session token: 684113bac004ccefb23513cfb416f1acd6c2fe198e6adae28be216f148c36fdd\n   Use this token to authenticate requests or set DANGEROUSLY_OMIT_AUTH=true to disable auth\n\n\ud83d\ude80 MCP Inspector is up and running at:\n   http://localhost:6274/?MCP_PROXY_AUTH_TOKEN=684113bac004ccefb23513cfb416f1acd6c2fe198e6adae28be216f148c36fdd\n\n\ud83c\udf10 Opening browser...\n",
+      "error": "",
+      "returncode": 124,
+      "test_type": "server_startup"
+    }
+  },
+  "issues": [],
+  "summary": {
+    "total_tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "pass_rate": "100.0%",
+    "critical_issues": 0,
+    "high_issues": 0,
+    "overall_status": "PASSED"
+  }
+}

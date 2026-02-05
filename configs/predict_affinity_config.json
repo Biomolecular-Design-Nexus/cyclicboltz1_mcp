@@ -1,0 +1,75 @@
+{
+  "_description": "Configuration for cyclic peptide-target binding affinity prediction",
+  "_source": "Extracted from examples/use_case_3_cyclic_peptide_affinity.py",
+  "_warning": "Boltz affinity prediction only supports small molecule ligands, not peptide-peptide interactions",
+
+  "model": {
+    "name": "boltz2",
+    "_comment": "Affinity prediction requires boltz2"
+  },
+
+  "processing": {
+    "accelerator": "cpu",
+    "_accelerator_comment": "cpu or gpu. GPU recommended for affinity calculations",
+    "diffusion_samples": 5,
+    "diffusion_samples_affinity": 5,
+    "_affinity_comment": "Specific diffusion samples for affinity calculations",
+    "recycling_steps": 3,
+    "use_msa_server": true
+  },
+
+  "affinity": {
+    "target_chain_id": "A",
+    "peptide_chain_id": "B",
+    "_chain_comment": "Target is usually chain A, peptide/ligand is chain B",
+    "peptide_max_length": 50,
+    "_length_comment": "Recommended maximum peptide length for affinity prediction"
+  },
+
+  "validation": {
+    "validate_sequences": true,
+    "warn_long_peptide": true,
+    "_warn_comment": "Warn if peptide sequence is unusually long for affinity prediction"
+  },
+
+  "output": {
+    "auto_output_dir": true,
+    "include_affinity_analysis": true,
+    "_analysis_comment": "Parse affinity results and provide interpretation"
+  },
+
+  "interpretation": {
+    "affinity_thresholds": {
+      "very_strong": -1.0,
+      "strong": 0.0,
+      "moderate": 1.0,
+      "_comment": "log10(IC50) thresholds for binding strength classification"
+    },
+    "probability_thresholds": {
+      "very_likely": 0.8,
+      "likely": 0.6,
+      "moderate": 0.4,
+      "_comment": "Binding probability thresholds"
+    }
+  },
+
+  "examples": {
+    "short_target": {
+      "peptide": "QLEDSEVEAVAKG",
+      "target": "MKLLVASILALAVCSGSAKETTVLTLSDQGKFSLCAGAKGATVDSSKLSLSLGSAQLVVHGEGTV",
+      "description": "Cyclic peptide vs short target protein (may fail due to Boltz limitation)"
+    },
+    "ligand_protein": {
+      "_comment": "This is what should work instead of peptide-peptide affinity",
+      "ligand_smiles": "CCO",
+      "target": "MKLLVASILALAVCSGSAKETTVLTLSDQGKFSLCAGAKGATVDSSKLSLSLGSAQLVVHGEGTV",
+      "description": "Small molecule ligand (ethanol) vs protein - this format should work"
+    }
+  },
+
+  "known_limitations": [
+    "Boltz affinity prediction only supports small molecule ligands",
+    "Peptide-peptide affinity prediction will fail with 'Chain B is not a ligand!' error",
+    "Use this script as template for ligand-protein affinity predictions"
+  ]
+}
